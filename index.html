@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lafargue Gravure – Gravure et marbrerie funéraire à [VILLE]</title>
+<meta name="description" content="Taille, façonnage et finition de monuments funéraires. Gravure, rénovation, pose. Devis gratuit.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#22262A;--ink2:#2E3338;--stone:#F2F3F1;--white:#FFFFFF;--line:#D9DBD7;--muted:#4B5157;--soft:#E6E8E5;--bronze:#7A5E34;--bronze-l:#D8C3A0;--ok:#2F5D3A}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Source Sans 3',system-ui,sans-serif;color:var(--ink);background:var(--stone);font-size:18px;line-height:1.65}
+a{color:var(--bronze)}a:hover{color:#4A3920}
+h1,h2,h3,h4{font-family:'Marcellus',serif;font-weight:400;margin:0;line-height:1.15}
+section{scroll-margin-top:110px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+.kicker{margin:0 0 12px;font-size:14px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--bronze)}
+.sec{padding:96px 0}
+.sec h2{font-size:44px;margin-bottom:18px}
+.lead{color:var(--muted);max-width:680px;margin:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;font:inherit;font-weight:700;text-decoration:none;cursor:pointer;border:0;border-radius:2px}
+.btn-light{background:var(--stone);color:var(--ink)}.btn-light:hover{background:#fff;color:var(--ink)}
+.btn-ghost{border:1px solid #8A9096;color:var(--stone);background:transparent}.btn-ghost:hover{color:#fff;border-color:#fff}
+.btn-dark{background:var(--ink);color:var(--stone)}.btn-dark:hover{background:#000;color:#fff}
+.btn-line{background:#fff;color:var(--ink);border:1px solid var(--ink);min-height:44px;padding:0 18px;font-size:16px}
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:var(--stone);border-bottom:1px solid var(--line);box-shadow:0 4px 14px rgba(34,38,42,.08)}
+.hdr{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 28px;padding:14px 24px}
+.brand{text-decoration:none;color:var(--ink);display:flex;flex-direction:column;line-height:1.2}
+.brand b{font-family:'Marcellus',serif;font-weight:400;font-size:22px;letter-spacing:.12em;text-transform:uppercase}
+.brand span{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+nav{display:flex;flex-wrap:wrap;gap:4px 26px;font-size:16px}
+nav a{color:var(--ink);text-decoration:none;padding:8px 0}nav a:hover{color:var(--bronze)}
+.hdr .btn{min-height:46px;padding:0 20px;font-size:16px}
+@media (max-width:820px){
+section{scroll-margin-top:118px}
+.hdr{padding:10px 16px;gap:4px 12px}
+.hdr{flex-wrap:wrap}.brand{flex:1 1 0;min-width:0}.brand b{font-size:15px;letter-spacing:.06em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand span{display:none}
+nav{order:3;width:100%;flex-wrap:nowrap;overflow-x:auto;justify-content:space-between;gap:0 16px;font-size:15px;border-top:1px solid var(--line)}
+nav a{white-space:nowrap}
+.hdr .btn{min-height:44px;padding:0 14px;font-size:14px}
+.sec{padding:64px 0}.sec h2{font-size:34px}
+}
+
+/* hero */
+.hero{background:var(--ink);color:var(--stone);position:relative;overflow:hidden}
+.hero .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:40px;padding-top:80px;padding-bottom:80px}
+.hero-txt{flex:1 1 440px;min-width:0}
+.hero h1{font-size:clamp(38px,5vw,60px);margin:0 0 24px}
+.hero p{color:#C9CDD0;max-width:520px;margin:0 0 34px}
+.hero .kicker{color:var(--bronze-l)}
+.hero-art{flex:1 1 380px;min-width:0;display:flex;justify-content:center}
+.hero-art svg{width:100%;max-width:460px;height:auto}
+.hero-ph{margin:0;width:100%;max-width:440px;position:relative}
+.hero-ph img{display:block;width:100%;aspect-ratio:10/11;object-fit:cover;border:1px solid #4A5056;box-shadow:0 24px 50px rgba(0,0,0,.45)}
+.hero-ph #hero-art{display:none}
+.hero-ph.fail img{display:none}.hero-ph.fail #hero-art{display:block}
+.granite-band{height:150px;background:#1E1F21 url(https://images.unsplash.com/photo-1778235296112-a9ea74fff37a?auto=format&fit=crop&w=1600&q=60) center/cover;position:relative}
+.granite-band p{position:absolute;inset:0;margin:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 24px;font-family:'Marcellus',serif;font-size:clamp(22px,3vw,32px);color:#E9E2D3;background:rgba(20,22,24,.45);letter-spacing:.04em}
+.work .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.credits{font-size:12px;color:#8A9096;margin-top:6px}.credits a{color:#C9CDD0;margin:0}
+.btns{display:flex;flex-wrap:wrap;gap:14px}
+
+/* savoir-faire */
+.steps3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2px;background:var(--line);margin-top:40px}
+.steps3 div{background:var(--stone);padding:32px 28px}
+.steps3 .n{font-family:'Marcellus',serif;font-size:40px;color:var(--bronze);margin:0 0 14px;line-height:1}
+.steps3 h3{font-size:24px;margin:0 0 10px}
+.steps3 p{margin:0;color:var(--muted);font-size:17px}
+
+/* prestations */
+.white{background:#fff}
+.svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:36px 32px;margin-top:44px}
+.svc div{border-top:1px solid var(--ink);padding-top:20px}
+.svc h3{font-size:24px;margin:0 0 8px}
+.svc p{margin:0;color:var(--muted);font-size:17px}
+
+/* nuancier */
+.studio{display:flex;flex-wrap:wrap;gap:36px;margin-top:40px;align-items:flex-start}
+.preview{flex:1 1 420px;min-width:0;background:linear-gradient(#E9EBE8,#DADDD9);border:1px solid var(--line);padding:18px}
+.preview svg{display:block;width:100%;height:auto}
+.preview .cap{margin:10px 0 0;font-size:15px;color:var(--muted);text-align:center}
+.choices{flex:1 1 340px;min-width:0}
+.choices h3{font-size:22px;margin:0 0 12px}
+.stones{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:28px}
+.stone{display:flex;flex-direction:column;align-items:stretch;gap:6px;padding:8px;border:2px solid var(--line);background:#fff;cursor:pointer;font:inherit;text-align:left}
+.stone[aria-pressed="true"]{border-color:var(--ink)}
+.stone svg{width:100%;height:54px;display:block}
+.stone span{font-size:15px;font-weight:600;line-height:1.2}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{min-height:44px;padding:0 16px;border:1px solid #A9AFB3;background:#fff;color:var(--ink);font:inherit;font-size:16px;cursor:pointer;border-radius:999px}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--stone)}
+.fin-desc{margin:12px 0 24px;color:var(--muted);font-size:16px;min-height:52px}
+.disclaimer{font-size:14px;color:var(--muted);margin:14px 0 0}
+
+/* réalisations */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:32px 0 26px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+.work{margin:0;display:flex;flex-direction:column;gap:10px}
+.work .ph{aspect-ratio:4/3;background:#3A3F44;display:flex;align-items:flex-end;padding:14px;color:#C9CDD0;font-size:14px;overflow:hidden;position:relative}
+.work .ph svg{position:absolute;inset:0;width:100%;height:100%}
+.work .ph span{position:relative;background:rgba(34,38,42,.75);padding:2px 8px}
+.work figcaption{font-size:16px}
+
+/* accompagnement */
+.timeline{list-style:none;padding:0;margin:40px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px;counter-reset:t}
+.timeline li{counter-increment:t;border-left:2px solid var(--bronze);padding-left:18px}
+.timeline li::before{content:counter(t,upper-roman);display:block;font-family:'Marcellus',serif;color:var(--bronze);font-size:26px;margin-bottom:4px}
+.timeline b{font-family:'Marcellus',serif;font-weight:400;font-size:22px;display:block}
+.timeline span{color:var(--muted);font-size:17px}
+
+/* devis */
+.book{background:#fff;border:1px solid var(--line);padding:32px;margin-top:36px;display:flex;flex-direction:column;gap:14px}
+@media (max-width:640px){.book{padding:18px}}
+.q{margin:0 0 12px;font-weight:700;font-size:18px}
+.summary{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:12px 16px;background:var(--stone);border:1px solid var(--line)}
+.summary p{margin:0;display:flex;align-items:center;gap:12px}
+.check{width:28px;height:28px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.link-btn{min-height:44px;padding:0 10px;border:0;background:transparent;color:var(--bronze);font:inherit;font-weight:700;text-decoration:underline;cursor:pointer}
+.pending{margin:0;padding:12px 16px;border:1px dashed #A9AFB3;color:#6B7076;font-weight:600}
+.grid-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px 18px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-weight:600;font-size:16px}
+.field input,.field select,.field textarea{min-height:48px;border:1px solid #A9AFB3;padding:0 14px;font:inherit;background:#fff;color:var(--ink)}
+.field textarea{padding:12px 14px;min-height:110px}
+.next{margin-top:18px}
+.done{text-align:center;padding:24px 8px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.done .check{width:60px;height:60px}
+.done h3{font-size:30px}
+
+/* contact */
+.contact{display:flex;flex-wrap:wrap;gap:48px}
+.contact .info{flex:1 1 340px;min-width:0}
+.contact dl{margin:0;display:flex;flex-direction:column;gap:16px}
+.contact dt{font-weight:700}
+.contact dd{margin:0;color:var(--muted)}
+.map{flex:1 1 420px;min-width:0;min-height:320px;background:var(--soft);display:flex;align-items:center;justify-content:center;color:var(--muted);border:1px solid var(--line)}
+footer{background:var(--ink);color:#C9CDD0;font-size:15px}
+footer .wrap{padding:30px 24px 72px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+footer p{margin:0}footer a{color:var(--stone);margin-left:20px}
+.demo{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);z-index:60;background:var(--ink);color:var(--stone);border:1px solid var(--bronze-l);border-radius:999px;padding:8px 18px;font-size:13px;font-weight:600;max-width:calc(100% - 24px);text-align:center}
+@media (max-width:640px){.demo{font-size:11px;padding:5px 12px;bottom:8px}.demo .long{display:none}}
+</style>
+</head>
+<body>
+
+<!-- Textures de pierre (générées, utilisées par le nuancier) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<filter id="specDark" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="4"/><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.6 1.45"/></filter>
+<filter id="specLight" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="11"/><feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 2.8 -1.55"/></filter>
+<filter id="specFine" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="2.2" numOctaves="1" seed="7"/><feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 3 -1.6"/></filter>
+<linearGradient id="gloss" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".35" stop-color="#fff" stop-opacity=".08"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".25"/></linearGradient>
+</defs>
+</svg>
+
+<header>
+<div class="wrap hdr">
+<a class="brand" href="#accueil"><b>Lafargue Gravure</b><span>Gravure &amp; marbrerie funéraire – [VILLE]</span></a>
+<nav aria-label="Navigation principale">
+<a href="#savoir-faire">Savoir-faire</a><a href="#prestations">Prestations</a><a href="#pierres">Pierres</a><a href="#realisations">Réalisations</a><a href="#contact">Contact</a>
+</nav>
+<a class="btn btn-dark" href="#devis">Demander un devis</a>
+</div>
+</header>
+
+<main>
+<section id="accueil" class="hero">
+<div class="wrap">
+<div class="hero-txt">
+<p class="kicker">Taille · Façonnage · Finition</p>
+<h1>Des monuments façonnés avec soin, pour honorer ceux que vous aimez.</h1>
+<p>Notre atelier taille, façonne et finit la pierre pour créer des monuments durables et personnalisés. Nous vous accompagnons avec écoute, à votre rythme.</p>
+<div class="btns"><a class="btn btn-light" href="#devis">Demander un devis gratuit</a><a class="btn btn-ghost" href="#pierres">Choisir sa pierre</a></div>
+</div>
+<div class="hero-art"><figure class="hero-ph"><img src="https://images.unsplash.com/photo-1776270126850-9b28a173d6c0?auto=format&fit=crop&w=1000&h=1100&q=70" alt="Monument en granit fleuri dans un cimetière, sous une lumière douce" onerror="this.parentNode.classList.add('fail')"><div id="hero-art"></div></figure></div>
+</div>
+</section>
+
+<section id="savoir-faire" class="sec"><div class="wrap">
+<p class="kicker">Notre atelier</p>
+<h2>Le travail de la pierre, de bout en bout</h2>
+<p class="lead">Chaque monument passe entre les mains de l'atelier, du bloc brut à la pose. [À COMPLÉTER : histoire de l'entreprise, année de création, transmission du métier.]</p>
+<div class="steps3">
+<div><p class="n">I</p><h3>Taille</h3><p>Débit et mise aux dimensions des blocs de pierre selon votre projet.</p></div>
+<div><p class="n">II</p><h3>Façonnage</h3><p>Formes, arêtes, chanfreins et profils travaillés à l'atelier.</p></div>
+<div><p class="n">III</p><h3>Finition</h3><p>Polissage, adoucissage, flammage ou bouchardage selon l'aspect choisi.</p></div>
+</div>
+</div></section>
+
+<div class="granite-band" role="img" aria-label="Granit noir poli"><p>« Graver dans la pierre ce qui ne doit pas s’oublier. »</p></div>
+<section id="prestations" class="sec white"><div class="wrap">
+<p class="kicker">Prestations</p>
+<h2>Ce que nous réalisons</h2>
+<div class="svc">
+<div><h3>Monuments funéraires</h3><p>Création sur mesure ou à partir de modèles, pour tous types de sépultures.</p></div>
+<div><h3>Gravure et inscriptions</h3><p>Lettres gravées, dorées ou peintes, motifs, et ajout d'inscriptions sur un monument existant.</p></div>
+<div><h3>Plaques et articles funéraires</h3><p>Plaques personnalisées, vases, jardinières et accessoires en pierre.</p></div>
+<div><h3>Caveaux et cavurnes</h3><p>Construction et aménagement selon le règlement du cimetière. [À CONFIRMER]</p></div>
+<div><h3>Rénovation et entretien</h3><p>Nettoyage, remise en état, repolissage et réfection des joints.</p></div>
+<div><h3>Pose et démarches</h3><p>Installation sur site et démarches auprès de la mairie si nécessaire.</p></div>
+</div>
+</div></section>
+
+<section id="pierres" class="sec"><div class="wrap">
+<p class="kicker">Matières et finitions</p>
+<h2>Visualisez votre monument</h2>
+<p class="lead">Choisissez une pierre et une finition pour vous faire une première idée. Nous vous présenterons les vrais échantillons à l'atelier.</p>
+<div class="studio">
+<div class="preview"><div id="preview-art"></div><p class="cap" id="preview-cap"></p></div>
+<div class="choices">
+<h3>1. La pierre</h3>
+<div class="stones" id="stones" role="group" aria-label="Choix de la pierre"></div>
+<h3>2. La finition</h3>
+<div class="chips" id="finishes" role="group" aria-label="Choix de la finition"></div>
+<p class="fin-desc" id="fin-desc"></p>
+<a class="btn btn-dark" href="#devis" id="use-choice">Demander un devis avec ce choix</a>
+<p class="disclaimer">Aperçu indicatif : chaque pierre naturelle est unique, les teintes réelles varient d'un bloc à l'autre. [LISTE DES PIERRES PROPOSÉES À CONFIRMER]</p>
+</div>
+</div>
+</div></section>
+
+<section id="realisations" class="sec white"><div class="wrap">
+<p class="kicker">Réalisations</p>
+<h2>Quelques réalisations</h2>
+<p class="lead">Photos publiées avec l'accord des familles. [Dans cette démo : photos d'illustration libres de droits, à remplacer par vos réalisations.]</p>
+<div class="filters chips" id="gal-filters" role="group" aria-label="Filtrer les réalisations"></div>
+<div class="gallery" id="gallery"></div>
+</div></section>
+
+<section id="accompagnement" class="sec"><div class="wrap">
+<p class="kicker">Notre accompagnement</p>
+<h2>Un projet mené avec vous, étape par étape</h2>
+<ol class="timeline">
+<li><b>Rencontre</b><span>À l'atelier, au cimetière ou chez vous, nous écoutons vos souhaits.</span></li>
+<li><b>Devis détaillé</b><span>Pierre, dimensions, gravure, délais : tout est précisé par écrit, sans engagement.</span></li>
+<li><b>Fabrication</b><span>Taille, façonnage et finition réalisés à l'atelier.</span></li>
+<li><b>Pose</b><span>Installation soignée et vérification avec vous sur place.</span></li>
+</ol>
+</div></section>
+
+<section id="devis" class="sec white"><div class="wrap">
+<p class="kicker">Devis gratuit</p>
+<h2>Demander un devis</h2>
+<p class="lead">Quelques questions simples pour préparer votre projet. Nous vous recontactons sous 48 h pour en parler, sans engagement.</p>
+<div class="book" id="book"></div>
+</div></section>
+
+<section id="contact" class="sec"><div class="wrap contact">
+<div class="info">
+<p class="kicker">Contact</p>
+<h2>Nous rendre visite</h2>
+<p class="lead" style="margin-bottom:28px">Pour un devis, un conseil ou une visite de l'atelier et de l'exposition, nous sommes à votre écoute.</p>
+<dl>
+<div><dt>Atelier et exposition</dt><dd>[ADRESSE], [CODE POSTAL] [VILLE]</dd></div>
+<div><dt>Horaires</dt><dd>[JOURS ET HORAIRES] – sur rendez-vous en dehors</dd></div>
+<div><dt>Téléphone</dt><dd><a href="tel:[TELEPHONE]">[TÉLÉPHONE]</a></dd></div>
+<div><dt>E-mail</dt><dd><a href="mailto:[EMAIL]">[E-MAIL]</a></dd></div>
+</dl>
+</div>
+<div class="map">[CARTE D'ACCÈS]</div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+<div><p>© 2026 Lafargue Gravure – [VILLE]</p><p class="credits">Photos d’illustration : Unsplash – C (@thecurlyone), Toby (@tobyjay2010), Chloé Lefleur (@chloe_lefleur), Danny Made (@damn_danny)</p></div>
+<p><a href="#">Mentions légales</a><a href="#">Confidentialité</a></p>
+</div></footer>
+<p class="demo">Version de démonstration<span class="long"> – aucune demande n'est envoyée</span></p>
+
+<script>
+(function(){
+var STONES=[
+{id:'noir',name:'Noir absolu',base:'#1E1F21',dark:.35,light:.30,txt:'#C9A45C'},
+{id:'gris',name:'Gris du Tarn',base:'#8C8F92',dark:.55,light:.45,txt:'#2A2C2E'},
+{id:'rose',name:'Rose de la Clarté',base:'#B28678',dark:.6,light:.4,txt:'#2A2C2E'},
+{id:'labrador',name:'Labrador bleu',base:'#26323F',dark:.45,light:.35,txt:'#C9A45C',sheen:'#5D84A8'},
+{id:'himalaya',name:'Himalaya',base:'#C4AE95',dark:.5,light:.35,txt:'#3A2E22'}
+];
+var FINISHES=[
+{id:'poli',name:'Poli',desc:'Brillant comme un miroir : la couleur de la pierre ressort au maximum. La finition la plus demandée.',veil:0,gloss:1,fine:0},
+{id:'adouci',name:'Adouci',desc:'Satiné et doux au toucher, sans reflets. Un aspect sobre et élégant.',veil:.12,gloss:0,fine:0},
+{id:'flamme',name:'Flammé',desc:'Surface légèrement rugueuse et éclaircie, obtenue à la flamme. Antidérapant, idéal pour les semelles.',veil:.22,gloss:0,fine:.5},
+{id:'boucharde',name:'Bouchardé',desc:'Martelé au marteau à pointes : un aspect brut, mat et traditionnel.',veil:.3,gloss:0,fine:.8}
+];
+var S={stone:'noir',fin:'poli',gal:'all',step:'type',t:null,p:null,f:null,done:false};
+var uid=0;
+function find(a,id){for(var i=0;i<a.length;i++)if(a[i].id===id)return a[i];}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+function granite(st,fn,w,h){
+  var g='<rect width="'+w+'" height="'+h+'" fill="'+st.base+'"/>';
+  if(st.sheen)g+='<rect width="'+w+'" height="'+h+'" filter="url(#specLight)" opacity=".35" style="mix-blend-mode:screen" fill="'+st.sheen+'"/>';
+  g+='<rect width="'+w+'" height="'+h+'" filter="url(#specDark)" opacity="'+(st.dark*(fn.veil?0.7:1))+'"/>';
+  g+='<rect width="'+w+'" height="'+h+'" filter="url(#specLight)" opacity="'+(st.light*(fn.veil?0.8:1))+'"/>';
+  if(fn.veil)g+='<rect width="'+w+'" height="'+h+'" fill="#fff" opacity="'+fn.veil+'"/>';
+  if(fn.fine)g+='<rect width="'+w+'" height="'+h+'" filter="url(#specFine)" opacity="'+fn.fine+'"/>';
+  if(fn.gloss)g+='<rect width="'+w+'" height="'+h+'" fill="url(#gloss)"/>';
+  return g;
+}
+function monument(stoneId,finId,name,small){
+  var st=find(STONES,stoneId),fn=find(FINISHES,finId),id='m'+(++uid);
+  var txt=fn.gloss?st.txt:(st.id==='noir'||st.id==='labrador'?'#E9E2D3':st.txt);
+  var s='<svg viewBox="0 0 320 270" role="img" aria-label="Aperçu d’un monument en '+esc(st.name)+', finition '+esc(fn.name.toLowerCase())+'">';
+  s+='<defs><clipPath id="'+id+'c"><path d="M100 172 V78 Q160 22 220 78 V172 Z"/><rect x="62" y="170" width="196" height="38"/><rect x="28" y="206" width="264" height="30"/></clipPath>';
+  s+='<linearGradient id="'+id+'s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".22"/></linearGradient></defs>';
+  s+='<ellipse cx="160" cy="246" rx="150" ry="12" fill="#000" opacity=".18"/>';
+  s+='<g clip-path="url(#'+id+'c)">'+granite(st,fn,320,270)+'<rect x="28" y="206" width="264" height="30" fill="url(#'+id+'s)"/><rect x="62" y="170" width="196" height="38" fill="url(#'+id+'s)"/></g>';
+  s+='<path d="M100 172 V78 Q160 22 220 78 V172 Z" fill="none" stroke="#000" stroke-opacity=".25"/><rect x="62" y="170" width="196" height="38" fill="none" stroke="#000" stroke-opacity=".25"/><rect x="28" y="206" width="264" height="30" fill="none" stroke="#000" stroke-opacity=".25"/>';
+  s+='<path d="M28 206 H292" stroke="#fff" stroke-opacity=".25"/><path d="M62 170 H258" stroke="#fff" stroke-opacity=".2"/>';
+  if(!small){
+    s+='<g fill="'+txt+'" font-family="Marcellus,serif" text-anchor="middle"><text x="160" y="104" font-size="11" letter-spacing="3">FAMILLE</text><text x="160" y="128" font-size="19" letter-spacing="2">'+esc(name||'[NOM]')+'</text>';
+    s+='<path d="M140 146 H180" stroke="'+txt+'" stroke-width="1"/><text x="160" y="193" font-size="10" letter-spacing="2" opacity=".9">À NOS DÉFUNTS</text></g>';
+  }
+  return s+'</svg>';
+}
+function swatch(st){var fn=find(FINISHES,'poli');return '<svg viewBox="0 0 120 54" aria-hidden="true">'+granite(st,fn,120,54)+'</svg>';}
+
+/* ---- nuancier ---- */
+function renderStudio(){
+  var h='';STONES.forEach(function(st){h+='<button type="button" class="stone" data-stone="'+st.id+'" aria-pressed="'+(S.stone===st.id)+'">'+swatch(st)+'<span>'+esc(st.name)+'</span></button>';});
+  document.getElementById('stones').innerHTML=h;
+  h='';FINISHES.forEach(function(f){h+='<button type="button" class="chip" data-fin="'+f.id+'" aria-pressed="'+(S.fin===f.id)+'">'+esc(f.name)+'</button>';});
+  document.getElementById('finishes').innerHTML=h;
+  var st=find(STONES,S.stone),fn=find(FINISHES,S.fin);
+  document.getElementById('preview-art').innerHTML=monument(S.stone,S.fin,'[NOM]');
+  document.getElementById('preview-cap').textContent=st.name+' – finition '+fn.name.toLowerCase();
+  document.getElementById('fin-desc').textContent=fn.desc;
+}
+
+/* ---- réalisations ---- */
+var WORKS=[
+{cat:'monument',label:'Monument fleuri – photo d\u2019illustration',s:'noir',f:'poli',img:'https://images.unsplash.com/photo-1776270126850-9b28a173d6c0?auto=format&fit=crop&w=800&h=600&q=70'},
+{cat:'monument',label:'Stèle avec croix – photo d\u2019illustration',s:'gris',f:'adouci',img:'https://images.unsplash.com/photo-1683542962837-686446891bae?auto=format&fit=crop&w=800&h=600&q=70'},
+{cat:'gravure',label:'Lettres gravées dans la pierre – photo d\u2019illustration',s:'gris',f:'poli',img:'https://images.unsplash.com/photo-1683463170503-44e65ba07401?auto=format&fit=crop&w=800&h=600&q=70'},
+{cat:'renovation',label:'Rénovation d’un monument ancien – [LIEU]',s:'gris',f:'adouci'},
+{cat:'monument',label:'Monument Rose de la Clarté – [LIEU]',s:'rose',f:'poli'},
+{cat:'monument',label:'Monument Labrador bleu – [LIEU]',s:'labrador',f:'poli'},
+{cat:'plaque',label:'Plaque personnalisée – [LIEU]',s:'himalaya',f:'adouci'}
+];
+var GCATS=[{id:'all',l:'Tout'},{id:'monument',l:'Monuments'},{id:'gravure',l:'Gravure'},{id:'renovation',l:'Rénovation'},{id:'plaque',l:'Plaques'}];
+function renderGallery(){
+  var h='';GCATS.forEach(function(c){h+='<button type="button" class="chip" data-gal="'+c.id+'" aria-pressed="'+(S.gal===c.id)+'">'+c.l+'</button>';});
+  document.getElementById('gal-filters').innerHTML=h;
+  h='';WORKS.filter(function(w){return S.gal==='all'||w.cat===S.gal;}).forEach(function(w){
+    h+='<figure class="work"><div class="ph" style="background:#DADDD9">'+monument(w.s,w.f,'',true)+(w.img?'<img src="'+w.img+'" alt="'+esc(w.label)+'" loading="lazy" onerror="this.remove()">':'<span>[PHOTO DE LA RÉALISATION]</span>')+'</div><figcaption>'+esc(w.label)+'</figcaption></figure>';
+  });
+  document.getElementById('gallery').innerHTML=h;
+}
+
+/* ---- devis ---- */
+var TYPES=['Monument neuf','Gravure ou inscription','Rénovation','Plaque ou article funéraire','Caveau ou cavurne','Autre projet'];
+var CHECK='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F2F3F1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>';
+function stoneLabel(){return S.p==='conseil'?'Je souhaite être conseillé':(find(STONES,S.p).name+' – '+find(FINISHES,S.f).name.toLowerCase());}
+function needsStone(){return S.t==='Monument neuf'||S.t==='Plaque ou article funéraire';}
+function renderBook(){
+  var el=document.getElementById('book'),h='';
+  if(S.done){h='<div class="done"><span class="check">'+CHECK.replace(/14/g,'28')+'</span><h3>Demande envoyée</h3><p style="margin:0">Merci. Nous vous recontactons sous 48 h pour parler de votre projet.</p><p style="margin:0;color:var(--muted);font-size:16px">[DÉLAI À CONFIRMER]</p><button type="button" class="btn-line" data-act="reset">Faire une autre demande</button></div>';el.innerHTML=h;return;}
+  // étape 1
+  if(S.step!=='type'&&S.t)h+='<div class="summary"><p><span class="check">'+CHECK+'</span><span>Projet : <strong>'+esc(S.t)+'</strong></span></p><button type="button" class="link-btn" data-edit="type">Modifier</button></div>';
+  else{h+='<div><p class="q">1. Quel est votre projet ?</p><div class="chips">';TYPES.forEach(function(t){h+='<button type="button" class="chip" data-type="'+esc(t)+'" aria-pressed="'+(S.t===t)+'">'+esc(t)+'</button>';});h+='</div></div>';}
+  // étape 2
+  if(needsStone()){
+    if(S.step==='pierre'){
+      h+='<div><p class="q">2. Pierre et finition</p><div class="chips" style="margin-bottom:12px">';
+      STONES.forEach(function(st){h+='<button type="button" class="chip" data-p="'+st.id+'" aria-pressed="'+(S.p===st.id)+'">'+esc(st.name)+'</button>';});
+      h+='<button type="button" class="chip" data-p="conseil" aria-pressed="'+(S.p==='conseil')+'">Je souhaite être conseillé</button></div>';
+      if(S.p&&S.p!=='conseil'){h+='<div class="chips">';FINISHES.forEach(function(f){h+='<button type="button" class="chip" data-f="'+f.id+'" aria-pressed="'+(S.f===f.id)+'">'+esc(f.name)+'</button>';});h+='</div>';}
+      if(S.p==='conseil'||(S.p&&S.f))h+='<button type="button" class="btn btn-dark next" data-act="to-lieu">Continuer</button>';
+      h+='</div>';
+    }else if(S.p&&(S.step==='lieu'||S.step==='coord'))h+='<div class="summary"><p><span class="check">'+CHECK+'</span><span>Pierre : <strong>'+esc(stoneLabel())+'</strong></span></p><button type="button" class="link-btn" data-edit="pierre">Modifier</button></div>';
+    else h+='<p class="pending">2. Pierre et finition</p>';
+  }
+  var n=needsStone()?3:2;
+  // étape lieu
+  if(S.step==='lieu'){
+    h+='<div><p class="q">'+n+'. Votre projet en quelques mots</p><div class="grid-form">';
+    h+='<div class="field"><label for="d-cim">Cimetière (commune)</label><input id="d-cim" type="text" value="'+esc(S.cim||'')+'" placeholder="ex. Cimetière de Fontenay-le-Comte"></div>';
+    h+='<div class="field"><label for="d-delai">Délai souhaité</label><select id="d-delai"><option>Pas d’urgence</option><option>Dans les 3 mois</option><option>Dans le mois</option><option>Le plus vite possible</option></select></div>';
+    h+='</div><div class="field" style="margin-top:14px"><label for="d-msg">Précisions (facultatif)</label><textarea id="d-msg" placeholder="Dimensions, inscription souhaitée, monument existant…">'+esc(S.msg||'')+'</textarea></div>';
+    h+='<button type="button" class="btn btn-dark next" data-act="to-coord">Continuer</button></div>';
+  }else if(S.step==='coord')h+='<div class="summary"><p><span class="check">'+CHECK+'</span><span>Lieu : <strong>'+esc(S.cim||'non précisé')+'</strong></span></p><button type="button" class="link-btn" data-edit="lieu">Modifier</button></div>';
+  else h+='<p class="pending">'+n+'. Votre projet en quelques mots</p>';
+  // coordonnées
+  if(S.step==='coord'){
+    h+='<div><p class="q">'+(n+1)+'. Vos coordonnées</p><div class="grid-form">';
+    h+='<div class="field"><label for="d-nom">Nom et prénom</label><input id="d-nom" type="text" autocomplete="name"></div>';
+    h+='<div class="field"><label for="d-tel">Téléphone</label><input id="d-tel" type="tel" autocomplete="tel"></div>';
+    h+='<div class="field"><label for="d-mail">E-mail (facultatif)</label><input id="d-mail" type="email" autocomplete="email"></div>';
+    h+='<div class="field"><label for="d-pref">Être recontacté par</label><select id="d-pref"><option>Téléphone</option><option>E-mail</option><option>Rendez-vous à l’atelier</option></select></div>';
+    h+='</div><button type="button" class="btn btn-dark next" data-act="send">Envoyer ma demande</button></div>';
+  }else h+='<p class="pending">'+(n+1)+'. Vos coordonnées</p>';
+  el.innerHTML=h;
+}
+function val(id){var e=document.getElementById(id);return e?e.value.trim():'';}
+
+document.addEventListener('click',function(e){
+  var b=e.target.closest('button,a');if(!b)return;
+  var d=b.dataset;
+  if(d.stone){S.stone=d.stone;renderStudio();return;}
+  if(d.fin){S.fin=d.fin;renderStudio();return;}
+  if(d.gal){S.gal=d.gal;renderGallery();return;}
+  if(b.id==='use-choice'){S.t='Monument neuf';S.p=S.stone;S.f=S.fin;S.step='lieu';S.done=false;renderBook();return;}
+  if(d.type){S.t=d.type;S.step=needsStone()?'pierre':'lieu';renderBook();return;}
+  if(d.p){S.p=d.p;if(d.p==='conseil')S.f=null;renderBook();return;}
+  if(d.f){S.f=d.f;renderBook();return;}
+  if(d.edit){if(S.step==='lieu'){S.cim=val('d-cim');S.msg=val('d-msg');}S.step=d.edit;renderBook();return;}
+  switch(d.act){
+    case 'to-lieu':S.step='lieu';renderBook();break;
+    case 'to-coord':S.cim=val('d-cim');S.msg=val('d-msg');S.step='coord';renderBook();break;
+    case 'send':if(!val('d-nom')||!val('d-tel')){alert('Merci d’indiquer au moins votre nom et votre téléphone.');return;}S.done=true;renderBook();document.getElementById('devis').scrollIntoView();break;
+    case 'reset':S={stone:S.stone,fin:S.fin,gal:S.gal,step:'type',t:null,p:null,f:null,done:false};renderBook();break;
+  }
+});
+
+document.getElementById('hero-art').innerHTML=monument('noir','poli','[NOM]');
+renderStudio();renderGallery();renderBook();
+})();
+</script>
+</body>
+</html>
