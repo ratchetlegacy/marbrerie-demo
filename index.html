@@ -514,12 +514,13 @@ footer a{color:#CFC8BB}
       <div class="acc locked" data-i="2">
         <button class="acc-h" type="button"><span class="n">3</span>Vos coordonnées<span class="sum"></span></button>
         <div class="acc-b">
-          <label class="f">Votre nom<input id="dNom" autocomplete="name"></label>
+          <div><div class="opt-title">Civilité</div><div class="seg" id="dCiv"><button type="button" data-v="Mme">Madame</button><button type="button" data-v="M.">Monsieur</button></div></div>
+          <label class="f">Votre nom<input id="dNom" autocomplete="family-name" placeholder="Ex. : Dupont"></label>
           <div class="row2">
             <label class="f">Téléphone<input id="dTel" type="tel" autocomplete="tel" inputmode="tel"></label>
             <label class="f"><span>E-mail <span style="font-weight:400;color:var(--muted)">(facultatif)</span></span><input id="dMail" type="email" autocomplete="email"></label>
           </div>
-          <p class="err" id="err2">Indiquez votre nom et un numéro de téléphone.</p>
+          <p class="err" id="err2">Choisissez Madame ou Monsieur, puis indiquez votre nom et un numéro de téléphone.</p>
           <button class="btn btn-gold next" type="button" data-next="2">Envoyer ma demande</button>
         </div>
       </div>
@@ -555,7 +556,7 @@ footer a{color:#CFC8BB}
 <script>
 /* Données partagées site + espace atelier (démo : stockées dans le navigateur) */
 var LFG=(function(){
-var KG='lfg-demo-galerie-v1',KI='lfg-demo-info-v1',KD='lfg-demo-devis-v1';
+var KG='lfg-demo-galerie-v1',KI='lfg-demo-info-v1',KD='lfg-demo-devis-v2';
 var CATS={gravure:'Gravure',portrait:'Portrait',redorure:'Redorure',entretien:'Entretien'};
 var NEEDS={gravure:'Gravure d’inscription',portrait:'Portrait sur granit',redorure:'Redorure des lettres',entretien:'Entretien de sépulture'};
 var INFO_DEF={annonceOn:false,annonce:'L’atelier sera fermé du 23 décembre au 2 janvier. Bonnes fêtes !',tel:'06 00 00 00 00',email:'contact@gravure-lafargue.fr',zone:'[Commune du siège] et alentours, dans tous les cimetières',dispo:'Du lundi au vendredi, 8h – 18h'};
@@ -567,9 +568,9 @@ var GAL_DEF=[
 ];
 function dayStr(off,h,m){var d=new Date();d.setDate(d.getDate()-off);d.setHours(h,m,0,0);return d.toISOString();}
 var DEV_DEF=[
- {id:'d1',date:dayStr(0,9,12),needs:['gravure'],ville:'Vouvant',nom:'Sylvie Morin',tel:'06 12 34 56 78',email:'',msg:'Ajout du nom de mon père sous celui de ma mère, même style de lettres.',photo:'',statut:'nouvelle'},
- {id:'d2',date:dayStr(1,17,40),needs:['redorure','entretien'],ville:'La Châtaigneraie',nom:'Gérard Bonnet',tel:'06 98 76 54 32',email:'g.bonnet@exemple.fr',msg:'Les lettres sont très effacées, et un nettoyage serait bien avant la Toussaint.',photo:'',statut:'nouvelle'},
- {id:'d3',date:dayStr(5,11,5),needs:['portrait'],ville:'Fontenay-le-Comte',nom:'Nadine Roy',tel:'07 11 22 33 44',email:'',msg:'Portrait de mon mari à partir d’une photo de mariage.',photo:'',statut:'traitee'}
+ {id:'d1',date:dayStr(0,9,12),needs:['gravure'],ville:'Vouvant',civ:'Mme',nom:'Morin',tel:'06 12 34 56 78',email:'',msg:'Ajout du nom de mon père sous celui de ma mère, même style de lettres.',photo:'',statut:'nouvelle'},
+ {id:'d2',date:dayStr(1,17,40),needs:['redorure','entretien'],ville:'La Châtaigneraie',civ:'M.',nom:'Bonnet',tel:'06 98 76 54 32',email:'g.bonnet@exemple.fr',msg:'Les lettres sont très effacées, et un nettoyage serait bien avant la Toussaint.',photo:'',statut:'nouvelle'},
+ {id:'d3',date:dayStr(5,11,5),needs:['portrait'],ville:'Fontenay-le-Comte',civ:'Mme',nom:'Roy',tel:'07 11 22 33 44',email:'',msg:'Portrait de mon mari à partir d’une photo de mariage.',photo:'',statut:'traitee'}
 ];
 function get(k,def){try{var v=localStorage.getItem(k);return v?JSON.parse(v):def;}catch(e){return def;}}
 function put(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true;}catch(e){return false;}}
@@ -718,21 +719,22 @@ function openAcc(i){accs.forEach(function(a,j){a.classList.toggle('open',j===i);
 accs.forEach(function(a,i){a.querySelector('.acc-h').onclick=function(){if(!a.classList.contains('locked'))openAcc(i)}});
 function needs(){return [].slice.call(document.querySelectorAll('input[name=need]:checked')).map(function(c){return NEEDS[c.value]})}
 document.querySelectorAll('[data-need]').forEach(function(a){a.addEventListener('click',function(){var c=document.querySelector('input[name=need][value='+a.dataset.need+']');if(c)c.checked=true})});
-var dPhotoData='';
+var dPhotoData='',dCiv='';
+document.getElementById('dCiv').onclick=function(e){var b=e.target.closest('button');if(!b)return;dCiv=b.dataset.v;document.getElementById('err2').style.display='none';this.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)})};
 document.getElementById('dPhoto').onchange=function(){var f=this.files[0];if(!f)return;LFG.resize(f,900,.75,function(u){dPhotoData=u});var t=document.getElementById('dThumb');t.src=URL.createObjectURL(f);t.style.display='block';document.getElementById('dPhotoT').textContent='Photo ajoutée';};
 document.querySelectorAll('[data-next]').forEach(function(b){b.onclick=function(){
   var i=+b.dataset.next,ok=true,sum='';
   if(i===0){ok=needs().length>0;sum=needs().join(', ')}
   if(i===1){ok=!!document.getElementById('dVille').value.trim();sum=document.getElementById('dVille').value.trim()}
-  if(i===2){ok=document.getElementById('dNom').value.trim()&&document.getElementById('dTel').value.trim().length>=8;sum=document.getElementById('dNom').value.trim()}
+  if(i===2){ok=dCiv&&document.getElementById('dNom').value.trim()&&document.getElementById('dTel').value.trim().length>=8;sum=dCiv+' '+document.getElementById('dNom').value.trim()}
   document.getElementById('err'+i).style.display=ok?'none':'block';
   if(!ok)return;
   accs[i].classList.add('ok');accs[i].querySelector('.sum').textContent=sum;
   if(i<2){openAcc(i+1);setTimeout(function(){accs[i+1].scrollIntoView({behavior:'smooth',block:'nearest'})},50);return}
   var msg=document.getElementById('dMsg').value.trim();
-  document.getElementById('recap').textContent='Prestation : '+needs().join(', ')+'\nCimetière : '+document.getElementById('dVille').value.trim()+'\nContact : '+document.getElementById('dNom').value.trim()+' · '+document.getElementById('dTel').value.trim()+(msg?'\nPrécisions : '+msg:'');
+  document.getElementById('recap').textContent='Prestation : '+needs().join(', ')+'\nCimetière : '+document.getElementById('dVille').value.trim()+'\nContact : '+dCiv+' '+document.getElementById('dNom').value.trim()+' · '+document.getElementById('dTel').value.trim()+(msg?'\nPrécisions : '+msg:'');
   var $v=function(id){return document.getElementById(id).value.trim()};
-  var D=LFG.devis();D.unshift({id:'d'+Date.now(),date:new Date().toISOString(),needs:[].slice.call(document.querySelectorAll('input[name=need]:checked')).map(function(c){return c.value}),ville:$v('dVille'),nom:$v('dNom'),tel:$v('dTel'),email:$v('dMail'),msg:msg,photo:dPhotoData,statut:'nouvelle'});
+  var D=LFG.devis();D.unshift({id:'d'+Date.now(),date:new Date().toISOString(),needs:[].slice.call(document.querySelectorAll('input[name=need]:checked')).map(function(c){return c.value}),ville:$v('dVille'),civ:dCiv,nom:$v('dNom'),tel:$v('dTel'),email:$v('dMail'),msg:msg,photo:dPhotoData,statut:'nouvelle'});
   if(!LFG.saveDevis(D)){D[0].photo='';LFG.saveDevis(D);}
   document.getElementById('devisBox').style.display='none';document.getElementById('doneBox').style.display='block';
   document.getElementById('devis').scrollIntoView({behavior:'smooth'});
