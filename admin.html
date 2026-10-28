@@ -104,7 +104,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--gold);background:#fff
 <script>
 /* Données partagées site + espace atelier (démo : stockées dans le navigateur) */
 var LFG=(function(){
-var KG='lfg-demo-galerie-v1',KI='lfg-demo-info-v1',KD='lfg-demo-devis-v1';
+var KG='lfg-demo-galerie-v1',KI='lfg-demo-info-v1',KD='lfg-demo-devis-v2';
 var CATS={gravure:'Gravure',portrait:'Portrait',redorure:'Redorure',entretien:'Entretien'};
 var NEEDS={gravure:'Gravure d’inscription',portrait:'Portrait sur granit',redorure:'Redorure des lettres',entretien:'Entretien de sépulture'};
 var INFO_DEF={annonceOn:false,annonce:'L’atelier sera fermé du 23 décembre au 2 janvier. Bonnes fêtes !',tel:'06 00 00 00 00',email:'contact@gravure-lafargue.fr',zone:'[Commune du siège] et alentours, dans tous les cimetières',dispo:'Du lundi au vendredi, 8h – 18h'};
@@ -116,9 +116,9 @@ var GAL_DEF=[
 ];
 function dayStr(off,h,m){var d=new Date();d.setDate(d.getDate()-off);d.setHours(h,m,0,0);return d.toISOString();}
 var DEV_DEF=[
- {id:'d1',date:dayStr(0,9,12),needs:['gravure'],ville:'Vouvant',nom:'Sylvie Morin',tel:'06 12 34 56 78',email:'',msg:'Ajout du nom de mon père sous celui de ma mère, même style de lettres.',photo:'',statut:'nouvelle'},
- {id:'d2',date:dayStr(1,17,40),needs:['redorure','entretien'],ville:'La Châtaigneraie',nom:'Gérard Bonnet',tel:'06 98 76 54 32',email:'g.bonnet@exemple.fr',msg:'Les lettres sont très effacées, et un nettoyage serait bien avant la Toussaint.',photo:'',statut:'nouvelle'},
- {id:'d3',date:dayStr(5,11,5),needs:['portrait'],ville:'Fontenay-le-Comte',nom:'Nadine Roy',tel:'07 11 22 33 44',email:'',msg:'Portrait de mon mari à partir d’une photo de mariage.',photo:'',statut:'traitee'}
+ {id:'d1',date:dayStr(0,9,12),needs:['gravure'],ville:'Vouvant',civ:'Mme',nom:'Morin',tel:'06 12 34 56 78',email:'',msg:'Ajout du nom de mon père sous celui de ma mère, même style de lettres.',photo:'',statut:'nouvelle'},
+ {id:'d2',date:dayStr(1,17,40),needs:['redorure','entretien'],ville:'La Châtaigneraie',civ:'M.',nom:'Bonnet',tel:'06 98 76 54 32',email:'g.bonnet@exemple.fr',msg:'Les lettres sont très effacées, et un nettoyage serait bien avant la Toussaint.',photo:'',statut:'nouvelle'},
+ {id:'d3',date:dayStr(5,11,5),needs:['portrait'],ville:'Fontenay-le-Comte',civ:'Mme',nom:'Roy',tel:'07 11 22 33 44',email:'',msg:'Portrait de mon mari à partir d’une photo de mariage.',photo:'',statut:'traitee'}
 ];
 function get(k,def){try{var v=localStorage.getItem(k);return v?JSON.parse(v):def;}catch(e){return def;}}
 function put(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true;}catch(e){return false;}}
@@ -177,7 +177,7 @@ function vDemandes(D){
     '<div class="seg"><button data-filtre="nouvelle" class="'+(A.filtre==='nouvelle'?'on':'')+'">À traiter</button><button data-filtre="traitee" class="'+(A.filtre==='traitee'?'on':'')+'">Traitées</button></div>';
   if(!L.length)h+='<div class="card empty">'+(A.filtre==='nouvelle'?'Aucune nouvelle demande pour le moment.':'Aucune demande traitée.')+'</div>';
   L.forEach(function(d){
-    h+='<div class="card dem '+d.statut+'"><div class="dem-h"><div><span class="st">'+(d.statut==='nouvelle'?'À traiter':'Traitée')+'</span><h3>'+esc(d.nom)+'</h3></div><span class="when">'+fmt(d.date)+'</span></div>'+
+    h+='<div class="card dem '+d.statut+'"><div class="dem-h"><div><span class="st">'+(d.statut==='nouvelle'?'À traiter':'Traitée')+'</span><h3>'+esc((d.civ?d.civ+' ':'')+d.nom)+'</h3></div><span class="when">'+fmt(d.date)+'</span></div>'+
     '<div class="tags">'+d.needs.map(function(n){return '<span>'+esc(LFG.NEEDS[n]||n)+'</span>'}).join('')+'</div>'+
     '<p>📍 Cimetière de <b>'+esc(d.ville)+'</b></p><p>📞 '+esc(d.tel)+(d.email?' · ✉️ '+esc(d.email):'')+'</p>'+
     (d.msg?'<div class="msg">« '+esc(d.msg)+' »</div>':'')+
@@ -242,8 +242,8 @@ document.addEventListener('click',function(e){
   case 'reset':if(confirm('Remettre toute la démo à zéro ?')){LFG.reset();render();toast('Démo remise à zéro')}break;
   case 'done':case 'undo':D=LFG.devis();D.forEach(function(d){if(d.id===t.dataset.id)d.statut=a==='done'?'traitee':'nouvelle'});LFG.saveDevis(D);render();toast(a==='done'?'Demande classée « traitée »':'Demande remise « à traiter »');break;
   case 'deldem':if(confirm('Supprimer définitivement cette demande ?')){D=LFG.devis().filter(function(d){return d.id!==t.dataset.id});LFG.saveDevis(D);render();toast('Demande supprimée')}break;
-  case 'sms':D=LFG.devis().filter(function(d){return d.id===t.dataset.id})[0];var prenom=(D.nom||'').split(' ')[0];
-    var txt='Bonjour '+prenom+', ici SARL Gravure Lafargue. Merci pour votre demande de devis pour le cimetière de '+D.ville+'. Je vous propose de passer voir le monument. Quand êtes-vous disponible ?';
+  case 'sms':D=LFG.devis().filter(function(d){return d.id===t.dataset.id})[0];var qui=D.civ?D.civ.replace('M.','Monsieur').replace('Mme','Madame')+' '+D.nom:D.nom;
+    var txt='Bonjour '+qui+', ici SARL Gravure Lafargue. Merci pour votre demande de devis pour le cimetière de '+D.ville+'. Je vous propose de passer voir le monument. Quand êtes-vous disponible ?';
     window.location.href='sms:'+(D.tel||'').replace(/\s/g,'')+'?&body='+encodeURIComponent(txt);break;
   case 'zoom':window.open(t.src,'_blank');break;
   case 'addphoto':E={i:-1,img:'',titre:'',cat:'gravure'};sheet();break;
