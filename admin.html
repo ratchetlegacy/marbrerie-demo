@@ -140,6 +140,23 @@ table.t td{border-bottom:1px solid var(--line);padding:8px 6px}table.t td.n,tabl
 input[type=password],input[type=number]{font:16px var(--sans);padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--ivory);width:100%;color:var(--ink)}
 .gi img.ct{object-fit:contain;background:#F2EEE6}
 .hint{font-size:13px;color:var(--muted)}
+.exp{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px}
+.phead{display:none}
+@media print{
+ @page{size:A4;margin:12mm}
+ body{background:#fff;font-size:12px}
+ .top,.noprint,.toast,main>.seg,.tr-hole,.tr-tip,.tr-catch{display:none!important}
+ main{padding:0;max-width:none}
+ .phead{display:block;font:600 22px var(--serif);border-bottom:2px solid var(--gold);padding-bottom:6px;margin-bottom:8px}
+ .phead:before{content:attr(data-print-title)}
+ main>h2{display:none}
+ .card,.kpi{break-inside:avoid;box-shadow:none}
+ .kpis{grid-template-columns:repeat(4,1fr)}
+ #map{height:260px}
+ .leaflet-control-zoom{display:none!important}
+ *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+
 .chk2{display:flex;gap:8px;align-items:center;font-size:14px;margin:-4px 0 14px;cursor:pointer}
 @media(max-width:560px){#tutoBtn span{display:none}}
 </style>
@@ -332,7 +349,7 @@ function vStats(D){
   var sum=function(a){return a.reduce(function(s,d){return s+(+d.montant||0)},0)};
   var ca=sum(acc),taux=acc.length+rej.length?Math.round(acc.length/(acc.length+rej.length)*100):null;
   var avecM=acc.filter(function(d){return d.montant!=null});
-  var h='<h2 style="font-size:32px">Statistiques</h2><p class="intro">Calculées à partir des demandes de devis et des montants saisis quand un devis est accepté ou rejeté.</p>'+
+  var h='<div class="phead" data-print-title="Statistiques '+(A.annee==='tout'?'depuis le début':A.annee)+' · SARL Gravure Lafargue"></div><h2 style="font-size:32px">Statistiques</h2><div class="exp noprint"><button class="btn btn-line btn-sm" data-a="exppdf">📄 Exporter en PDF</button><button class="btn btn-line btn-sm" data-a="expxls">📊 Exporter en Excel</button></div><p class="intro">Calculées à partir des demandes de devis et des montants saisis quand un devis est accepté ou rejeté.</p>'+
     '<div class="seg">'+Y.map(function(y){return '<button data-annee="'+y+'" class="'+(A.annee===y?'on':'')+'">'+y+'</button>'}).join('')+'<button data-annee="tout" class="'+(A.annee==='tout'?'on':'')+'">Depuis le début</button></div>';
   if(!L.length)return h+'<div class="card empty">Pas encore de demande sur cette période. Les statistiques se rempliront au fil des demandes.</div>';
   h+='<div class="kpis">'+
@@ -365,6 +382,48 @@ function vStats(D){
     '<table class="t"><tr><th>Commune</th><th class="n">Demandes</th><th class="n">Acceptés</th><th class="n">CA</th></tr>'+ZK.slice(0,15).map(function(k){var z=Z[k];return '<tr><td>'+esc(k)+'</td><td class="n">'+z.n+'</td><td class="n">'+z.a+'</td><td class="n">'+eur(z.ca)+'</td></tr>'}).join('')+'</table></div>';
   A._zone=Z;
   return h;
+}
+function statsData(){
+  var D=A.D||[],L=D.filter(function(d){return A.annee==='tout'||String(new Date(d.cree).getFullYear())===A.annee});
+  var acc=L.filter(function(d){return d.statut==='acceptee'}),rej=L.filter(function(d){return d.statut==='rejetee'});
+  var sum=function(a){return a.reduce(function(s,d){return s+(+d.montant||0)},0)},r2=function(n){return Math.round(n*100)/100};
+  var avecM=acc.filter(function(d){return d.montant!=null});
+  var res=[['Période',A.annee==='tout'?'Depuis le début':A.annee],['Demandes reçues',L.length],['Devis acceptés',acc.length],['Devis rejetés',rej.length],['En attente',L.length-acc.length-rej.length],
+    ['Taux d’acceptation (%)',acc.length+rej.length?Math.round(acc.length/(acc.length+rej.length)*100):''],['Chiffre d’affaires accepté (€)',r2(sum(acc))],['Montant moyen d’un devis accepté (€)',avecM.length?r2(sum(avecM)/avecM.length):''],['Montant des devis rejetés (€)',r2(sum(rej))]];
+  var P={};L.forEach(function(d){var N=(d.data&&d.data.needs)||[];N.forEach(function(n){var p=P[n]=P[n]||{n:0,a:0,ca:0};p.n++;if(d.statut==='acceptee'){p.a++;p.ca+=(+d.montant||0)/N.length}})});
+  var pres=[['Prestation','Demandes','Acceptés','CA (€)']].concat(Object.keys(P).sort(function(a,b){return P[b].ca-P[a].ca}).map(function(k){return [LFG.NEEDS[k]||k,P[k].n,P[k].a,r2(P[k].ca)]}));
+  var Q={};L.forEach(function(d){var p=d.data&&d.data.plaque;if(!p)return;var k=p.nom+(p.ref?' ('+p.ref+')':'');var q=Q[k]=Q[k]||{n:0,a:0,ca:0};q.n++;if(d.statut==='acceptee'){q.a++;q.ca+=+d.montant||0}});
+  var plq=[['Plaque','Demandes','Vendues','CA (€)']].concat(Object.keys(Q).sort(function(a,b){return Q[b].n-Q[a].n}).map(function(k){return [k,Q[k].n,Q[k].a,r2(Q[k].ca)]}));
+  var M=MOIS.map(function(m){return {n:0,a:0,ca:0}});L.forEach(function(d){var m=M[new Date(d.cree).getMonth()];m.n++;if(d.statut==='acceptee'){m.a++;m.ca+=+d.montant||0}});
+  var mois=[['Mois','Demandes','Acceptés','CA (€)']].concat(M.map(function(m,i){return ['Janvier,Février,Mars,Avril,Mai,Juin,Juillet,Août,Septembre,Octobre,Novembre,Décembre'.split(',')[i],m.n,m.a,r2(m.ca)]}));
+  var grp=function(pro,lab){var g=L.filter(function(d){return d.pro===pro}),a=g.filter(function(d){return d.statut==='acceptee'}),r=g.filter(function(d){return d.statut==='rejetee'});return [lab,g.length,a.length,a.length+r.length?Math.round(a.length/(a.length+r.length)*100):'',r2(sum(a))]};
+  var cli=[['Clients','Demandes','Acceptés','Acceptation (%)','CA (€)'],grp(false,'Particuliers'),grp(true,'Professionnels')];
+  var R={};rej.forEach(function(d){var k=d.motif||'Non précisé';R[k]=(R[k]||0)+1});
+  var mot=[['Raison du rejet','Nombre']].concat(Object.keys(R).sort(function(a,b){return R[b]-R[a]}).map(function(k){return [k,R[k]]}));
+  var Z={};L.forEach(function(d){var k=d.ville||'?';var z=Z[k]=Z[k]||{n:0,a:0,ca:0};z.n++;if(d.statut==='acceptee'){z.a++;z.ca+=+d.montant||0}});
+  var com=[['Commune du cimetière','Demandes','Acceptés','CA (€)']].concat(Object.keys(Z).sort(function(a,b){return Z[b].n-Z[a].n}).map(function(k){return [k,Z[k].n,Z[k].a,r2(Z[k].ca)]}));
+  var ST={nouvelle:'À traiter',acceptee:'Accepté',rejetee:'Rejeté'};
+  var dem=[['Date','Type','Client','Contact','SIRET / SIREN','Prestations','Plaque','Commune','Code postal','Téléphone','E-mail','Statut','Montant (€)','Raison du rejet']].concat(L.map(function(d){var x=d.data||{};
+    return [new Date(d.cree).toLocaleDateString('fr-FR'),d.pro?'Professionnel':'Particulier',d.pro&&x.societe?x.societe:[x.civ,x.prenom,x.nom].filter(Boolean).join(' '),d.pro?[x.prenom,x.nom].filter(Boolean).join(' '):'',x.siret||'',(x.needs||[]).map(function(n){return LFG.NEEDS[n]||n}).join(', '),x.plaque?x.plaque.nom+(x.plaque.ref?' ('+x.plaque.ref+')':''):'',d.ville||x.ville||'',x.cp||'',x.tel||'',x.email||'',ST[d.statut],d.montant!=null?+d.montant:'',d.motif||'']}));
+  return {res:res,pres:pres,plq:plq,mois:mois,cli:cli,mot:mot,com:com,dem:dem};
+}
+var xlsxLib=null;
+function exportXlsx(btn){
+  if(!xlsxLib)xlsxLib=new Promise(function(ok,ko){var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';s.onload=ok;s.onerror=function(){xlsxLib=null;ko()};document.head.appendChild(s)});
+  busy(btn,true);
+  xlsxLib.then(function(){
+    var S=statsData(),wb=XLSX.utils.book_new();
+    [['Résumé',S.res],['Par prestation',S.pres],['Plaques',S.plq],['Mois par mois',S.mois],['Particuliers-Pros',S.cli],['Raisons des rejets',S.mot],['Communes',S.com],['Demandes',S.dem]].forEach(function(f){
+      if(f[1].length<2&&f[0]!=='Résumé')return;
+      var ws=XLSX.utils.aoa_to_sheet(f[1]);ws['!cols']=f[1][0].map(function(_,c){return {wch:Math.min(45,Math.max(10,f[1].reduce(function(m,r){return Math.max(m,String(r[c]==null?'':r[c]).length)},0)+2))}});
+      XLSX.utils.book_append_sheet(wb,ws,f[0]);
+    });
+    XLSX.writeFile(wb,'Statistiques Gravure Lafargue '+(A.annee==='tout'?'depuis le début':A.annee)+'.xlsx');busy(btn,false);toast('Fichier Excel téléchargé');
+  }).catch(function(){busy(btn,false);toast('Export impossible : vérifiez la connexion')});
+}
+function exportPdf(){
+  var t=document.title;document.title='Statistiques Gravure Lafargue '+(A.annee==='tout'?'depuis le début':A.annee);
+  toast('Choisissez « Enregistrer en PDF » dans la fenêtre d’impression');setTimeout(function(){window.print();document.title=t},400);
 }
 function kpi(v,l){return '<div class="kpi"><b>'+v+'</b><span>'+l+'</span></div>'}
 var leaf=null;
@@ -566,6 +625,8 @@ document.addEventListener('click',function(e){
   var sv=function(p,msg){busy(app,true);p.then(function(){busy(app,false);render();if(msg)toast(msg)}).catch(function(x){busy(app,false);oops(x)})};
   switch(a){
   case 'tuto':tour(0);break;
+  case 'exppdf':exportPdf();break;
+  case 'expxls':exportXlsx(t);break;
   case 'logout':LFG.rpc('lfg_deconnexion',{p_token:LFG.token()}).catch(function(){});LFG.setToken(null);A.etat='login';A.D=null;render();break;
   case 'closemodal':var mm=$('modal');if(mm)mm.remove();E=null;break;
   case 'accepter':sheetDecision(d,'acceptee');break;
