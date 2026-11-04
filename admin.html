@@ -153,7 +153,7 @@ var LFG=(function(){
 var SB='https://onpyyvgihaoczaxkhkfb.supabase.co',KEY='sb_publishable_Y1eXX2KgoCQGlMOhNoP-jA_zLOE4_gI',KT='lfg-token';
 var CATS={restauration:'Restauration',redorure:'Redorure',linogravure:'Linogravure',gravure:'Gravure'};
 var AVCATS={restauration:'Restauration',redorure:'Redorure',gravure:'Gravure'};
-var NEEDS={restauration:'Restauration',redorure:'Redorure',linogravure:'Linogravure d’après photo',gravure:'Gravure / lettrage',plaque:'Plaque funéraire',portrait:'Portrait sur granit',entretien:'Entretien de sépulture'};
+var NEEDS={restauration:'Restauration',redorure:'Redorure',linogravure:'Linogravure',gravure:'Gravure / lettrage',plaque:'Plaque funéraire',portrait:'Portrait sur granit',entretien:'Entretien de sépulture'};
 var INFO_DEF={annonceOn:false,annonce:'L’atelier sera fermé du 23 décembre au 2 janvier. Bonnes fêtes !',tel:'06 00 00 00 00',email:'contact@gravure-lafargue.fr',zone:'[Commune du siège] et alentours, dans tous les cimetières',dispo:'Du lundi au vendredi, 8h – 18h'};
 var GAL_DEF=[
  {id:'g1',img:'builtin:res',titre:'Ajout d’un nom sur une plaque existante',cat:'gravure'},
@@ -170,10 +170,11 @@ var SPE_DEF={
   {id:'d1',titre:'Redorure de lettrage',desc:'Les lettres gravées du monument sont reprises à la feuille d’or ou en peinture.',img:'builtin:e8'},
   {id:'d2',titre:'Redorure de photo',desc:'Le cadre et les ornements dorés autour d’un portrait retrouvent leur éclat.',img:''},
   {id:'d3',titre:'Redorure de texte sur plaque funéraire',desc:'Le texte des plaques est redoré pour être de nouveau lisible.',img:''}]},
- linogravure:{titre:'Linogravure sur plaque',intro:'Une photo qui vous est chère, gravée sur plaque.',ex:[
-  {id:'l1',titre:'Portrait',desc:'Le visage d’un proche, gravé d’après votre photo.',img:''},
-  {id:'l2',titre:'Paysage',desc:'Un lieu qui comptait : la mer, la maison, la campagne.',img:''},
-  {id:'l3',titre:'Animal de compagnie',desc:'Le compagnon fidèle, gravé avec ses traits.',img:''}]}
+ linogravure:{titre:'Linogravure sur plaque',intro:'Un texte, une photo, un paysage ou un animal de compagnie, gravé sur plaque.',ex:[
+  {id:'l1',cat:'texte',titre:'Linogravure texte',desc:'Un nom, une citation ou une prière, gravés avec finesse.',img:''},
+  {id:'l2',cat:'photo',titre:'Linogravure photo',desc:'Le visage d’un proche, gravé d’après votre photo.',img:''},
+  {id:'l3',cat:'paysage',titre:'Linogravure paysage',desc:'Un lieu qui comptait : la mer, la maison, la campagne.',img:''},
+  {id:'l4',cat:'animaux',titre:'Linogravure animaux',desc:'Le compagnon fidèle, gravé avec ses traits.',img:''}]}
 };
 var C={},IMG={},FULL={},token=null;
 try{token=localStorage.getItem(KT)}catch(e){}
@@ -207,6 +208,8 @@ return {
  photo:function(file){return Promise.all([rz(file,1600,.82),rz(file,720,.74)]).then(function(r){return {full:r[0],thumb:r[1]}})},
  upload:function(p){return rpc('lfg_image_ajouter',{p_token:token,p_thumb:p.thumb,p_full:p.full}).then(function(id){IMG[id]=p.thumb;FULL[id]=p.full;return 'img:'+id})},
  resize:function(file,max,q,cb){rz(file,max,q).then(cb)},
+ LINOCATS:{texte:'Texte',photo:'Photo',paysage:'Paysage',animaux:'Animaux'},
+ linoCat:function(e){if(e.cat)return e.cat;var t=(e.titre||'').toLowerCase();return /paysage/.test(t)?'paysage':/anima/.test(t)?'animaux':/texte/.test(t)?'texte':'photo'},
  token:function(){return token},
  setToken:function(t){token=t;try{t?localStorage.setItem(KT,t):localStorage.removeItem(KT)}catch(e){}},
  telHref:function(t){var n=(t||'').replace(/[^\d+]/g,'');if(n.charAt(0)==='0')n='+33'+n.slice(1);return 'tel:'+n},
@@ -442,16 +445,16 @@ function vSpe(){
   ['restauration','redorure','linogravure'].forEach(function(k){var x=S[k];
     h+='<div class="card"><h3>'+esc(x.titre)+'</h3><div class="field"><label for="si-'+k+'">Texte d’introduction</label><textarea id="si-'+k+'" rows="2">'+esc(x.intro||'')+'</textarea></div>'+
       '<button class="btn btn-line btn-sm" data-a="saveintro" data-k="'+k+'">Enregistrer le texte</button><div class="exl">'+
-      (x.ex||[]).map(function(e,i){var u=LFG.src(e.img,B);return '<div class="exi">'+(u?'<img src="'+u+'" alt="">':'<span class="noimg">Pas de photo</span>')+'<div class="tx"><b>'+esc(e.titre)+'</b><small>'+esc(e.desc||'')+'</small></div><div class="row">'+
+      (x.ex||[]).map(function(e,i){var u=LFG.src(e.img,B);return '<div class="exi">'+(u?'<img src="'+u+'" alt="">':'<span class="noimg">Pas de photo</span>')+'<div class="tx"><b>'+(k==='linogravure'?'<span style="color:var(--gold-d);font-size:12px;letter-spacing:.08em;text-transform:uppercase">'+LFG.LINOCATS[LFG.linoCat(e)]+'</span> ':'')+esc(e.titre)+'</b><small>'+esc(e.desc||'')+'</small></div><div class="row">'+
         '<button class="btn btn-line btn-sm" data-a="upex" data-k="'+k+'" data-i="'+i+'" '+(i===0?'disabled style="opacity:.35"':'')+' aria-label="Monter">↑</button><button class="btn btn-line btn-sm" data-a="editex" data-k="'+k+'" data-i="'+i+'">Modifier</button><button class="btn btn-red btn-sm" data-a="delex" data-k="'+k+'" data-i="'+i+'">Suppr.</button></div></div>'}).join('')+
       '</div><button class="btn btn-gold btn-sm" data-a="addex" data-k="'+k+'">＋ Ajouter un exemple</button></div>';
   });
   return h;
 }
 function editEx(k,i){var S=LFG.specialites(),e=i<0?{img:'',titre:'',desc:''}:S[k].ex[i];
-  editSheet({titre:(i<0?'Nouvel exemple':'Modifier l’exemple')+' · '+esc(S[k].titre),photos:[['img','Photo de l’exemple']],champs:[['titre','Titre','text','Ex. : Linogravure portrait'],['desc','Description','textarea','Quelques mots pour expliquer le travail']],v:{img:e.img,titre:e.titre,desc:e.desc},
+  editSheet({titre:(i<0?'Nouvel exemple':'Modifier l’exemple')+' · '+esc(S[k].titre),photos:[['img','Photo de l’exemple']],champs:[['titre','Titre','text','Ex. : Linogravure portrait'],['desc','Description','textarea','Quelques mots pour expliquer le travail']],chips:k==='linogravure'?{k:'cat',label:'Type (exemples affichés dans la partie Linogravure)',opts:LFG.LINOCATS}:null,v:{img:e.img,titre:e.titre,desc:e.desc,cat:k==='linogravure'?LFG.linoCat(e):''},
     check:function(v){return !v.titre?'Ajoutez un titre.':''},ok:'Exemple enregistré',
-    save:function(v){var S=LFG.specialites(),n={id:i<0?'x'+Date.now():S[k].ex[i].id,titre:v.titre,desc:v.desc,img:v.img||''};if(i<0)S[k].ex.push(n);else S[k].ex[i]=n;return LFG.saveSpecialites(S)}});}
+    save:function(v){var S=LFG.specialites(),n={id:i<0?'x'+Date.now():S[k].ex[i].id,titre:v.titre,desc:v.desc,img:v.img||''};if(k==='linogravure')n.cat=v.cat||'photo';if(i<0)S[k].ex.push(n);else S[k].ex[i]=n;return LFG.saveSpecialites(S)}});}
 
 /* ---------- Plaques ---------- */
 function vPlaques(){
