@@ -140,6 +140,20 @@ table.t td{border-bottom:1px solid var(--line);padding:8px 6px}table.t td.n,tabl
 input[type=password],input[type=number]{font:16px var(--sans);padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--ivory);width:100%;color:var(--ink)}
 .gi img.ct{object-fit:contain;background:#F2EEE6}
 .hint{font-size:13px;color:var(--muted)}
+.fondp{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}@media(max-width:640px){.fondp{grid-template-columns:1fr}}
+.fprev{position:relative;border-radius:12px;overflow:hidden;background:var(--ivory);border:1px solid var(--line);min-height:150px;display:flex;align-items:center;padding:20px}
+.fprev .fbg{position:absolute;inset:0;background:center/cover no-repeat}
+.fprev b{position:relative;font:600 26px/1.1 var(--serif)}.fprev i{color:var(--gold-d)}
+input[type=range]{width:100%;accent-color:var(--gold)}
+details.tx{border:1px solid var(--line);border-radius:12px;margin-bottom:8px;background:var(--ivory)}
+details.tx summary{padding:13px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;list-style:none}
+details.tx summary::-webkit-details-marker{display:none}
+details.tx summary:after{content:'▾';margin-left:auto;color:var(--muted)}details.tx[open] summary:after{content:'▴'}
+details.tx .mod{font-size:12px;font-weight:700;color:var(--gold-d);background:#FBF1DD;border-radius:999px;padding:2px 9px}
+.txb{padding:0 14px 14px}
+.txb small{color:var(--muted)}
+.vbox{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+
 .exp{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px}
 .phead{display:none}
 @media print{
@@ -193,6 +207,9 @@ var SPE_DEF={
   {id:'l3',cat:'paysage',titre:'Linogravure paysage',desc:'Un lieu qui comptait : la mer, la maison, la campagne.',img:''},
   {id:'l4',cat:'animaux',titre:'Linogravure animaux',desc:'Le compagnon fidèle, gravé avec ses traits.',img:''}]}
 };
+var TEXTES=[["Accueil", [["accueil.k", "Petit titre", "Restauration · Redorure · Linogravure"], ["accueil.t1", "Titre (début)", "L’art de graver"], ["accueil.t2", "Titre (fin, en écriture manuscrite)", "le souvenir"], ["accueil.lead", "Description", "Restauration de concessions, redorure des inscriptions et linogravure sur plaque d’après vos photos. Un savoir-faire au service de la mémoire, avec précision, soin et respect."]]], ["Notre savoir-faire", [["prestations.k", "Petit titre", "Nos spécialités"], ["prestations.t1", "Titre (début)", "Notre"], ["prestations.t2", "Titre (fin, en écriture manuscrite)", "savoir-faire"], ["prestations.lead", "Description", "Redonner son éclat à une sépulture, graver un souvenir qui vous est cher."]]], ["Cartes du savoir-faire", [["card.restauration.t", "Carte 1 – titre", "Restauration de concession"], ["card.restauration.d", "Carte 1 – description", "Une remise en état complète de la sépulture, pour lui rendre son aspect d’origine."], ["card.redorure.t", "Carte 2 – titre", "Redorure"], ["card.redorure.d", "Carte 2 – description", "Les inscriptions effacées par le temps retrouvent tout leur éclat."], ["card.linogravure.t", "Carte 3 – titre", "Linogravure sur plaque"], ["card.linogravure.d", "Carte 3 – description", "Une photo qui vous est chère, gravée sur plaque : portrait, paysage, animal de compagnie."], ["pro.k", "Encadré pro – petit titre", "Gravure & lettrage"], ["pro.t", "Encadré pro – titre", "Particuliers et professionnels du funéraire"], ["pro.d", "Encadré pro – description", "Inscriptions, ajouts de noms, motifs et épitaphes. Marbriers, pompes funèbres : nous travaillons aussi pour vous."]]], ["Avant / après", [["avantapres.k", "Petit titre", "Avant · Après"], ["avantapres.t1", "Titre (début)", "Le résultat,"], ["avantapres.t2", "Titre (fin, en écriture manuscrite)", "en un geste"], ["avantapres.lead", "Description", "Choisissez une prestation, puis faites glisser le curseur pour comparer l’avant et l’après de nos chantiers."]]], ["Linogravure", [["linogravure.k", "Petit titre", "Linogravure sur plaque"], ["linogravure.t1", "Titre (début)", "Votre souvenir,"], ["linogravure.t2", "Titre (fin, en écriture manuscrite)", "gravé pour toujours"], ["linogravure.lead", "Description", "Un texte, un portrait, un paysage, un animal de compagnie : choisissez l’orientation et le type de linogravure pour voir des exemples de nos réalisations."]]], ["Réalisations", [["galerie.k", "Petit titre", "Galerie"], ["galerie.t1", "Titre (début)", "Nos"], ["galerie.t2", "Titre (fin, en écriture manuscrite)", "réalisations"], ["galerie.lead", "Description", "Quelques chantiers récents. Touchez une photo pour l’agrandir."]]], ["Plaques funéraires", [["plaques.k", "Petit titre", "Plaques funéraires"], ["plaques.t1", "Titre (début)", "Choisissez"], ["plaques.t2", "Titre (fin, en écriture manuscrite)", "votre plaque"], ["plaques.lead", "Description", "Choisissez un modèle, écrivez votre texte : nous vous rappelons avec un devis personnalisé."]]], ["Notre méthode", [["savoir-faire.k", "Petit titre", "Notre méthode"], ["savoir-faire.t1", "Titre (début)", "Une inscription,"], ["savoir-faire.t2", "Titre (fin, en écriture manuscrite)", "pas à pas"], ["savoir-faire.lead", "Description", "Les étapes d’une gravure de lettres, photographiées lors d’une véritable réalisation."]]], ["Sur le terrain", [["ter.k", "Petit titre", "Sur le terrain"], ["ter.t", "Titre", "Un atelier qui se déplace"], ["ter.d", "Description", "Notre véhicule est équipé pour graver directement au cimetière : pas besoin de déposer le monument dans la plupart des cas."], ["ter.o", "Titre de la liste des outils", "Nos outils :"]]], ["Demande de devis", [["devis.k", "Petit titre", "Parlons de votre projet"], ["devis.t1", "Titre (début)", "Demander"], ["devis.t2", "Titre (fin, en écriture manuscrite)", "un devis"], ["devis.lead", "Description", "Quatre petites étapes, une minute à peine. Nous vous recontactons pour en parler ensemble."]]]];
+var OUTILS_DEF=[{id:'o1',nom:'Sableuse',desc:'',img:'',video:''},{id:'o2',nom:'Compresseur',desc:'',img:'',video:''},{id:'o3',nom:'Traceur de découpe',desc:'',img:'',video:''},{id:'o4',nom:'Machine Mirtels Robotics',desc:'',img:'',video:''},{id:'o5',nom:'Feuille d’or',desc:'',img:'',video:''}];
+var FOND_DEF={img:'builtin:e6',opacite:12};
 var C={},IMG={},FULL={},token=null;
 try{token=localStorage.getItem(KT)}catch(e){}
 function H(){return {'apikey':KEY,'Content-Type':'application/json'}}
@@ -203,7 +220,7 @@ function clone(o){return JSON.parse(JSON.stringify(o))}
 function val(k,def){return C[k]!=null?clone(C[k]):clone(def)}
 function refs(){var s={};function add(v){if(typeof v==='string'&&v.indexOf('img:')===0)s[v.slice(4)]=1}
   (C.galerie||[]).forEach(function(g){add(g.img)});(C.avap||[]).forEach(function(a){add(a.avant);add(a.apres)});
-  (C.plaques||[]).forEach(function(p){add(p.img)});var S=C.specialites||{};for(var k in S)(S[k].ex||[]).forEach(function(e){add(e.img)});
+  (C.plaques||[]).forEach(function(p){add(p.img)});(C.outils||[]).forEach(function(o){add(o.img)});if(C.fond)add(C.fond.img);var S=C.specialites||{};for(var k in S)(S[k].ex||[]).forEach(function(e){add(e.img)});
   return Object.keys(s).filter(function(id){return !(id in IMG)})}
 function loadThumbs(){var ids=refs();if(!ids.length)return Promise.resolve();
   return get('lfg_images?select=id,thumb&id=in.('+ids.join(',')+')').then(function(L){L.forEach(function(x){IMG[x.id]=x.thumb})})}
@@ -227,6 +244,19 @@ return {
  resize:function(file,max,q,cb){rz(file,max,q).then(cb)},
  LINOCATS:{texte:'Texte',photo:'Photo',paysage:'Paysage',animaux:'Animaux'},
  linoCat:function(e){if(e.cat)return e.cat;var t=(e.titre||'').toLowerCase();return /paysage/.test(t)?'paysage':/anima/.test(t)?'animaux':/texte/.test(t)?'texte':'photo'},
+ TEXTES:TEXTES,
+ textes:function(){var o={};TEXTES.forEach(function(g){g[1].forEach(function(f){o[f[0]]=f[2]})});var t=C.textes||{};for(var k in t)if(t[k]!=null&&t[k]!=='')o[k]=t[k];return o},
+ textesPerso:function(){return clone(C.textes||{})},
+ fond:function(){var d=clone(FOND_DEF),f=C.fond||{};for(var k in f)d[k]=f[k];return d},
+ outils:function(){return val('outils',OUTILS_DEF)},
+ saveTextes:function(v){return save('textes',v)},saveFond:function(v){return save('fond',v)},saveOutils:function(v){return save('outils',v)},
+ videoUrl:function(v){if(!v)return '';if(/^https?:/.test(v))return v;return SB+'/storage/v1/object/public/lfg-videos/'+v},
+ youtube:function(v){var m=String(v||'').match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|shorts\/|embed\/))([\w-]{6,})/);return m?m[1]:''},
+ uploadVideo:function(file){
+   if(file.size>50*1024*1024)return Promise.reject(new Error('trop_lourd'));
+   return fetch(SB+'/functions/v1/lfg-upload',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:token,type:file.type})}).then(function(r){return r.ok?r.json():fail(r)})
+   .then(function(j){return fetch(SB+'/storage/v1'+j.url,{method:'PUT',headers:{'Content-Type':file.type||'video/mp4','x-upsert':'true'},body:file}).then(function(r){if(!r.ok)return fail(r);return j.path})})
+ },
  token:function(){return token},
  setToken:function(t){token=t;try{t?localStorage.setItem(KT,t):localStorage.removeItem(KT)}catch(e){}},
  telHref:function(t){var n=(t||'').replace(/[^\d+]/g,'');if(n.charAt(0)==='0')n='+33'+n.slice(1);return 'tel:'+n},
@@ -275,7 +305,7 @@ function render(){
     return;
   }
   var D=A.D||[],nb=D.filter(function(d){return d.statut==='nouvelle'}).length;
-  var T=[['demandes','Demandes'+(nb?' <span class="badge">'+nb+'</span>':'')],['stats','Statistiques'],['avap','Avant/après'],['galerie','Galerie'],['spe','Spécialités'],['plaques','Plaques'],['infos','Infos'],['mdp','Mot de passe']];
+  var T=[['demandes','Demandes'+(nb?' <span class="badge">'+nb+'</span>':'')],['stats','Statistiques'],['avap','Avant/après'],['galerie','Galerie'],['spe','Spécialités'],['plaques','Plaques'],['perso','Personnalisation'],['infos','Infos'],['mdp','Mot de passe']];
   var h='<div class="top"><div class="topbar"><img src="'+LOGO+'" alt="Gravure Lafargue"><div class="links">'+
     '<button class="btn btn-line btn-sm" data-a="tuto" id="tutoBtn" aria-label="Tutoriel">🎓 <span>Tutoriel</span></button><a class="btn btn-line btn-sm" id="siteBtn" href="index.html" target="_blank"><span>Voir le site</span></a><button class="btn btn-line btn-sm" data-a="logout"><span>Quitter</span></button></div></div>'+
     '<nav class="tabs">'+T.map(function(t){return '<button data-tab="'+t[0]+'" class="'+(A.tab===t[0]?'on':'')+'">'+t[1]+'</button>'}).join('')+'</nav></div><main>';
@@ -285,6 +315,7 @@ function render(){
   if(A.tab==='galerie')h+=vGalerie();
   if(A.tab==='spe')h+=vSpe();
   if(A.tab==='plaques')h+=vPlaques();
+  if(A.tab==='perso')h+=vPerso();
   if(A.tab==='infos')h+=vInfos();
   if(A.tab==='mdp')h+=vMdp();
   app.innerHTML=h+'</main>';
@@ -532,6 +563,62 @@ function editPl(i){var P=LFG.plaques(),p=i<0?{img:'',nom:'',ref:'',desc:''}:P[i]
     check:function(v){return !v.img?'Ajoutez une photo.':!v.nom?'Indiquez le nom du modèle.':''},ok:i<0?'Plaque ajoutée au site':'Plaque modifiée',
     save:function(v){var P=LFG.plaques(),n={id:i<0?'p'+Date.now():P[i].id,img:v.img,nom:v.nom,ref:v.ref,desc:v.desc};if(i<0)P.push(n);else P[i]=n;return LFG.savePlaques(P)}});}
 
+/* ---------- Personnalisation ---------- */
+var FD=null;
+function vPerso(){
+  var F=FD||LFG.fond(),u=F.img?(F.thumb||LFG.src(F.img,B)):'';FD=F;
+  var h='<h2 style="font-size:32px">Personnalisation</h2><p class="intro">Le fond de l’accueil, tous les titres et textes des sections, et les outils présentés dans « Sur le terrain ».</p>';
+  h+='<div class="card"><h3>Photo de fond de l’accueil</h3><p class="hint" style="margin:-4px 0 12px">Une photo très transparente derrière le titre. Réglez la transparence pour que le texte reste bien lisible.</p>'+
+    '<div class="fondp"><div class="fprev"><div class="fbg" id="fbg" style="'+(u?'background-image:url('+u+');opacity:'+(F.opacite/100):'')+'"></div><b>L’art de graver<br><i>le souvenir</i></b></div>'+
+    '<div class="fctl"><label class="btn btn-line btn-sm" for="f-ph">'+(u?'Changer la photo':'Choisir une photo')+'</label><input id="f-ph" type="file" accept="image/*" hidden>'+
+    '<div class="field" style="margin:12px 0 0"><label for="f-op">Visibilité de la photo : <b id="f-opv">'+F.opacite+' %</b></label><input id="f-op" type="range" min="0" max="60" step="1" value="'+F.opacite+'"><small>0 % = pas de photo · 10 à 20 % conseillé</small></div>'+
+    '<button class="btn btn-gold" style="width:100%;margin-top:12px" data-a="savefond">Enregistrer le fond</button></div></div></div>';
+  /* textes */
+  var P=LFG.textesPerso();
+  h+='<div class="card"><h3>Titres et textes du site</h3><p class="hint" style="margin:-4px 0 12px">Touchez une section pour modifier ses textes. Laisser un champ vide remet le texte d’origine.</p>';
+  LFG.TEXTES.forEach(function(g,gi){var n=g[1].filter(function(f){return P[f[0]]!=null&&P[f[0]]!=='';}).length;
+    h+='<details class="tx"'+(A.txOpen===gi?' open':'')+' data-gi="'+gi+'"><summary><b>'+esc(g[0])+'</b>'+(n?'<span class="mod">'+n+' modifié'+(n>1?'s':'')+'</span>':'')+'</summary><div class="txb">';
+    g[1].forEach(function(f){var v=P[f[0]]!=null?P[f[0]]:'',long=f[2].length>70;
+      h+='<div class="field"><label for="t-'+esc(f[0])+'">'+esc(f[1])+'</label>'+(long?'<textarea rows="3" id="t-'+esc(f[0])+'" data-tk="'+esc(f[0])+'" placeholder="'+esc(f[2])+'">'+esc(v)+'</textarea>':'<input type="text" id="t-'+esc(f[0])+'" data-tk="'+esc(f[0])+'" value="'+esc(v)+'" placeholder="'+esc(f[2])+'">')+'<small>D’origine : '+esc(f[2])+'</small></div>';});
+    h+='<button class="btn btn-gold btn-sm" data-a="savetx" data-gi="'+gi+'">Enregistrer « '+esc(g[0])+' »</button></div></details>';});
+  h+='</div>';
+  /* outils */
+  var O=LFG.outils();
+  h+='<div class="card"><h3>Nos outils</h3><p class="hint" style="margin:-4px 0 12px">Affichés dans « Sur le terrain ». Un clic sur le nom ouvre la vidéo (environ 30 secondes).</p><div class="exl">';
+  O.forEach(function(o,i){var u=LFG.src(o.img,B);
+    h+='<div class="exi">'+(u?'<img src="'+u+'" alt="">':'<span class="noimg">Pas de photo</span>')+'<div class="tx"><b>'+esc(o.nom)+'</b><small>'+(o.video?(LFG.youtube(o.video)?'▶ Vidéo YouTube':'▶ Vidéo'):'Pas de vidéo')+(o.desc?' · '+esc(o.desc):'')+'</small></div><div class="row">'+
+      '<button class="btn btn-line btn-sm" data-a="upout" data-i="'+i+'" '+(i===0?'disabled style="opacity:.35"':'')+' aria-label="Monter">↑</button><button class="btn btn-line btn-sm" data-a="editout" data-i="'+i+'">Modifier</button><button class="btn btn-red btn-sm" data-a="delout" data-i="'+i+'">Suppr.</button></div></div>';});
+  h+='</div><button class="btn btn-gold btn-sm" data-a="addout">＋ Ajouter un outil</button></div>';
+  return h;
+}
+var OE=null;
+function editOutil(i){
+  var O=LFG.outils(),o=i<0?{nom:'',desc:'',img:'',video:''}:O[i];OE={i:i,img:o.img,video:o.video,file:null};
+  var yt=LFG.youtube(o.video),m=document.createElement('div');m.className='modal';m.id='modal';
+  m.innerHTML='<div class="sheet"><h2>'+(i<0?'Nouvel outil':'Modifier l’outil')+'</h2>'+
+    '<label class="pick" id="pk-o"><input type="file" accept="image/*" id="o-ph">'+(o.img?'<img src="'+LFG.src(o.img,B)+'" alt="">':'<span style="font-size:30px">📷</span>')+'<b>Photo de l’outil (facultatif)</b></label>'+
+    '<div class="field"><label for="o-nom">Nom de l’outil</label><input type="text" id="o-nom" value="'+esc(o.nom)+'" placeholder="Ex. : Sableuse"></div>'+
+    '<div class="field"><label for="o-desc">Description (facultatif)</label><textarea id="o-desc" rows="2" placeholder="À quoi il sert, en une phrase">'+esc(o.desc||'')+'</textarea></div>'+
+    '<div class="field"><label>Vidéo (environ 30 secondes)</label><div class="vbox"><label class="btn btn-line btn-sm" for="o-vid">'+(o.video&&!yt?'Changer la vidéo':'Choisir une vidéo')+'</label><input type="file" id="o-vid" accept="video/mp4,video/quicktime,video/webm" hidden><span id="o-vs" class="hint">'+(o.video&&!yt?'Vidéo enregistrée ✓':'50 Mo maximum – filmez en 720p si possible')+'</span></div>'+
+    '<small style="display:block;margin-top:8px">ou un lien YouTube :</small><input type="url" id="o-yt" value="'+esc(yt?o.video:'')+'" placeholder="https://youtu.be/..."></div>'+
+    (o.video?'<label class="chk2" style="display:flex;gap:8px;align-items:center;margin-bottom:10px"><input type="checkbox" id="o-novid"> Retirer la vidéo</label>':'')+
+    '<p class="err" id="o-err" hidden></p><div class="foot"><button class="btn btn-line" data-a="closemodal">Annuler</button><button class="btn btn-gold" data-a="saveout">Enregistrer</button></div></div>';
+  document.body.appendChild(m);m.addEventListener('click',function(e){if(e.target===m){m.remove();OE=null}});
+  $('o-ph').onchange=function(){var f=this.files[0];if(!f)return;LFG.photo(f).then(function(p){OE.img=p;var el=$('pk-o');el.querySelectorAll('img,span').forEach(function(x){x.remove()});var im=document.createElement('img');im.src=p.thumb;el.insertBefore(im,el.querySelector('b'))})};
+  $('o-vid').onchange=function(){var f=this.files[0];if(!f)return;if(f.size>50*1024*1024){$('o-vs').textContent='Vidéo trop lourde ('+Math.round(f.size/1048576)+' Mo, 50 maximum). Raccourcissez-la ou filmez en 720p.';return}OE.file=f;$('o-vs').textContent='✓ '+f.name+' ('+Math.round(f.size/1048576)+' Mo) – envoyée à l’enregistrement';$('o-yt').value=''};
+}
+function saveOutil(btn){
+  var o=OE,er=$('o-err'),nom=$('o-nom').value.trim(),yt=$('o-yt').value.trim(),nov=$('o-novid')&&$('o-novid').checked;
+  if(!nom){er.textContent='Indiquez le nom de l’outil.';er.hidden=false;return}
+  if(yt&&!LFG.youtube(yt)){er.textContent='Ce lien YouTube n’est pas reconnu.';er.hidden=false;return}
+  busy(btn,true);btn.textContent=o.file?'Envoi de la vidéo…':'Envoi…';
+  (o.img&&typeof o.img==='object'?LFG.upload(o.img).then(function(r){o.img=r}):Promise.resolve())
+  .then(function(){return o.file?LFG.uploadVideo(o.file).then(function(p){o.video=p}):null})
+  .then(function(){var v=nov?'':(yt||o.video||'');var O=LFG.outils(),n={id:o.i<0?'o'+Date.now():O[o.i].id,nom:nom,desc:$('o-desc').value.trim(),img:o.img||'',video:v};if(o.i<0)O.push(n);else O[o.i]=n;return LFG.saveOutils(O)})
+  .then(function(){var m=$('modal');if(m)m.remove();OE=null;render();toast('Outil enregistré ✓')})
+  .catch(function(e){busy(btn,false);btn.textContent='Enregistrer';er.textContent=String(e.message).indexOf('trop_lourd')>=0?'Vidéo trop lourde (50 Mo maximum).':'L’enregistrement n’a pas fonctionné (connexion ?). Réessayez.';er.hidden=false;console.warn(e)});
+}
+
 /* ---------- Infos ---------- */
 function vInfos(){
   var I=LFG.info();
@@ -569,6 +656,7 @@ var TOUR=[
  {tab:'galerie',sel:'.add',t:'Galerie',x:'Les photos de vos réalisations. La flèche ↑ fait monter une photo dans la liste ; la première s’affiche en premier sur le site.'},
  {tab:'spe',sel:'main .card',t:'Spécialités',x:'Le contenu des fenêtres « En savoir plus » : un texte d’introduction et des exemples avec photo et description, pour la restauration, la redorure et la linogravure.'},
  {tab:'plaques',sel:'.add',t:'Plaques funéraires',x:'Ajoutez les plaques de vos fournisseurs avec leur <b>référence</b>. Le client choisit sa plaque et écrit son texte : vous recevez la demande avec la référence.'},
+ {tab:'perso',sel:'main .card',t:'Personnalisation',x:'La photo de fond de l’accueil et sa transparence, tous les titres et textes du site, et vos outils avec leur vidéo.'},
  {tab:'infos',sel:'main .card',t:'Infos et message du site',x:'Téléphone, disponibilités, zone d’intervention, et un message à afficher en haut du site (congés, Toussaint…). Plus bas : l’adresse e-mail qui reçoit une alerte à chaque nouvelle demande.'},
  {tab:'mdp',sel:'#mdpCard',t:'Mot de passe',x:'Pour changer le mot de passe : l’actuel, puis le nouveau deux fois.'},
  {tab:'demandes',sel:'#siteBtn',t:'Voir le site',x:'Ouvre le site public dans un nouvel onglet pour vérifier vos changements.'},
@@ -617,7 +705,7 @@ document.addEventListener('submit',function(e){e.preventDefault();if(e.target.id
 });
 document.addEventListener('click',function(e){
   var t=e.target.closest('[data-tab],[data-filtre],[data-type],[data-annee],[data-a]');if(!t)return;
-  if(t.dataset.tab){A.tab=t.dataset.tab;render();window.scrollTo(0,0);return}
+  if(t.dataset.tab){A.tab=t.dataset.tab;FD=null;render();window.scrollTo(0,0);return}
   if(t.dataset.filtre){A.filtre=t.dataset.filtre;render();return}
   if(t.dataset.type){A.type=t.dataset.type;render();return}
   if(t.dataset.annee){A.annee=t.dataset.annee;render();return}
@@ -626,10 +714,17 @@ document.addEventListener('click',function(e){
   var sv=function(p,msg){busy(app,true);p.then(function(){busy(app,false);render();if(msg)toast(msg)}).catch(function(x){busy(app,false);oops(x)})};
   switch(a){
   case 'tuto':tour(0);break;
+  case 'savefond':var F=FD;busy(t,true);(F.img&&typeof F.img==='object'?LFG.upload(F.img).then(function(r){F.img=r;delete F.thumb}):Promise.resolve()).then(function(){FD=null;return LFG.saveFond({img:F.img,opacite:+F.opacite})}).then(function(){busy(t,false);render();toast('Fond de l’accueil enregistré ✓')}).catch(function(x){busy(t,false);oops(x)});break;
+  case 'savetx':var gi=+t.dataset.gi,P=LFG.textesPerso();LFG.TEXTES[gi][1].forEach(function(f){var v=$('t-'+f[0]).value.trim();if(v)P[f[0]]=v;else delete P[f[0]]});A.txOpen=gi;sv(LFG.saveTextes(P),'Textes enregistrés ✓');break;
+  case 'addout':editOutil(-1);break;
+  case 'editout':editOutil(+t.dataset.i);break;
+  case 'saveout':saveOutil(t);break;
+  case 'delout':if(confirm('Retirer cet outil du site ?')){G=LFG.outils();G.splice(+t.dataset.i,1);sv(LFG.saveOutils(G),'Outil retiré')}break;
+  case 'upout':G=LFG.outils();sv(LFG.saveOutils(mv(G,+t.dataset.i)));break;
   case 'exppdf':exportPdf();break;
   case 'expxls':exportXlsx(t);break;
   case 'logout':LFG.rpc('lfg_deconnexion',{p_token:LFG.token()}).catch(function(){});LFG.setToken(null);A.etat='login';A.D=null;render();break;
-  case 'closemodal':var mm=$('modal');if(mm)mm.remove();E=null;break;
+  case 'closemodal':var mm=$('modal');if(mm)mm.remove();E=null;OE=null;break;
   case 'accepter':sheetDecision(d,'acceptee');break;
   case 'rejeter':sheetDecision(d,'rejetee');break;
   case 'savedec':var mt=$('m-mt').value.replace(',','.'),me=$('m-err');var n=mt===''?null:+mt;
@@ -674,7 +769,9 @@ document.addEventListener('click',function(e){
     busy(t,true);LFG.rpc('lfg_mdp_changer',{p_token:LFG.token(),p_ancien:$('p-old').value,p_nouveau:nw}).then(function(ok){busy(t,false);if(!ok){pe.textContent='Mot de passe actuel incorrect.';pe.hidden=false;return}$('p-old').value=$('p-new').value=$('p-new2').value='';toast('Mot de passe changé ✓')}).catch(function(x){busy(t,false);oops(x)});break;
   }
 });
-document.addEventListener('change',function(e){if(e.target.id==='p-show')['p-old','p-new','p-new2'].forEach(function(id){$(id).type=e.target.checked?'text':'password'})});
+document.addEventListener('input',function(e){if(e.target.id==='f-op'&&FD){FD.opacite=+e.target.value;$('f-opv').textContent=FD.opacite+' %';var b=$('fbg');if(b)b.style.opacity=FD.opacite/100}});
+document.addEventListener('change',function(e){if(e.target.id==='f-ph'&&e.target.files[0]){LFG.photo(e.target.files[0]).then(function(p){FD.img=p;FD.thumb=p.thumb;if(!FD.opacite)FD.opacite=15;render()})}
+  if(e.target.id==='p-show')['p-old','p-new','p-new2'].forEach(function(id){$(id).type=e.target.checked?'text':'password'})});
 render();start();
 </script>
 </body>
