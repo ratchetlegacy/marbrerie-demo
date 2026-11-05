@@ -508,7 +508,6 @@ footer a{color:#CFC8BB}
           <div class="seg" id="lType"><button data-v="texte">Texte</button><button data-v="photo" class="on">Photo</button><button data-v="paysage">Paysage</button><button data-v="animaux">Animaux</button></div></div>
         <div><div class="opt-title">Forme</div>
           <div class="seg" id="lShape"><button data-v="ovale" class="on">Ovale</button><button data-v="rect">Rectangle</button><button data-v="arche">Arche</button></div></div>
-        <label class="f"><span>Texte à graver <span style="font-weight:400;color:var(--muted)">(facultatif)</span></span><input id="lTxt" maxlength="60" placeholder="Ex. : Toujours dans nos cœurs" autocomplete="off"></label>
       </div>
       <div class="prev-col rv">
         <div class="lex" id="lEx"></div>
@@ -840,9 +839,7 @@ $('lEx').addEventListener('click',function(ev){var b=ev.target.closest('[data-lx
 [['lOri','ori'],['lType','type'],['lShape','shape']].forEach(function(a){var seg=$(a[0]);
   seg.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;seg.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)});LP[a[1]]=b.dataset.v;LP.i=0;renderL()})});
 $('useLino').onclick=function(){
-  var txt=$('lTxt').value.trim();
   $('dMsg').value='Linogravure '+LTY[LP.type].toLowerCase()+', orientation '+LL[LP.ori]+', forme '+LL[LP.shape]+'.';
-  if(txt){$('dTexte').value=txt}
   setNeed('linogravure');$('devis').scrollIntoView({behavior:'smooth'});
 };
 $('dLinoF').onchange=function(){var f=this.files[0];if(!f)return;LFG.resize(f,1600,.82,function(u){dLinoData=u});var t=$('dLinoT');t.src=URL.createObjectURL(f);t.style.display='block';$('dLinoTx').textContent='Photo à graver ajoutée'};
